@@ -1,5 +1,5 @@
 
-
+This Docker VM sets up Greenplum on Rocky Linux 8. To install a different version, simply modify the Dockerfile accordingly.
 
 ## Docker Build and Run Instructions
 
