@@ -41,6 +41,13 @@ To connect back to the running Docker container, use the following command:
 docker exec -it mdw /bin/bash
 ```
 
+If it doesn't work, start the container and then connect again:
+
+```bash
+docker start mdw
+docker exec -it mdw /bin/bash
+```
+
 ### 6. Starting and Stopping the Container
 
 - **To start the container**:
