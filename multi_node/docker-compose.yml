@@ -1,0 +1,45 @@
+services:
+  master:
+    image: warehousepg-multi-node
+    container_name: mdw
+    hostname: mdw
+    tty: true
+    platform: linux/amd64 
+    networks:
+      gpdb-network:
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./datadirs/master:/data/master
+
+  segment1:
+    image: warehousepg-multi-node
+    container_name: sdw1
+    hostname: sdw1
+    tty: true
+    platform: linux/amd64
+    networks:
+      gpdb-network:
+    volumes:
+      - ./datadirs/sdw1_primary1:/data1/primary
+      - ./datadirs/sdw1_primary2:/data2/primary
+      - ./datadirs/sdw1_mirror1:/data1/mirror
+      - ./datadirs/sdw1_mirror2:/data2/mirror
+
+  segment2:
+    image: warehousepg-multi-node
+    container_name: sdw2
+    hostname: sdw2
+    tty: true
+    platform: linux/amd64
+    networks:
+      gpdb-network:
+    volumes:
+      - ./datadirs/sdw2_primary1:/data1/primary
+      - ./datadirs/sdw2_primary2:/data2/primary
+      - ./datadirs/sdw2_mirror1:/data1/mirror
+      - ./datadirs/sdw2_mirror2:/data2/mirror
+
+networks:
+  gpdb-network:
+    driver: bridge
