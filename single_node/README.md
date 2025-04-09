@@ -1,15 +1,25 @@
 
-This Docker VM sets up Greenplum on Rocky Linux 8. To install a different version, simply modify the Dockerfile accordingly.
+#  WarehousePG Single-Node Setup with Docker
+
+This Docker VM sets up WarehousePG on Rocky Linux 8. To install a different version, simply modify the Dockerfile accordingly.
 
 ## Docker Build and Run Instructions
 
-### 1. Export your EDB Repos 2.0 Token 
+## 1. Clone the Repository
+Clone this repository and navigate to the `single-node` directory:
+
+```bash
+git clone https://github.com/hpedb/warehousepg-docker.git
+cd single-node
+```
+
+### 2. Export your EDB Repos 2.0 Token
 
 ```bash
 export export EDB_REPO_TOKEN=<YOUR TOKEN>
 ```
 
-### 2. Enable Docker BuildKit
+### 3. Enable Docker BuildKit
 
 First, enable Docker BuildKit to improve the build performance and capabilities:
 
@@ -17,7 +27,7 @@ First, enable Docker BuildKit to improve the build performance and capabilities:
 export DOCKER_BUILDKIT=1
 ```
 
-### 3. Build the Docker Image
+### 4. Build the Docker Image
 
 Use the following command to build the Docker image, specifying the secret `EDB_REPO_TOKEN`:
 
@@ -25,7 +35,7 @@ Use the following command to build the Docker image, specifying the secret `EDB_
 docker build --secret id=EDB_REPO_TOKEN --platform linux/amd64 --no-cache -t warehousepg-el8 .
 ```
 
-### 4. Run the Docker Container
+### 5. Run the Docker Container
 
 After building the image, you can run the container with the following command:
 
@@ -33,7 +43,7 @@ After building the image, you can run the container with the following command:
 docker run --hostname mdw --name mdw -it warehousepg-el8
 ```
 
-### 5. Connect Back to the Container
+### 6. Connect Back to the Container
 
 To connect back to the running Docker container, use the following command:
 
@@ -48,7 +58,7 @@ docker start mdw
 docker exec -it mdw /bin/bash
 ```
 
-### 6. Starting and Stopping the Container
+### 7. Starting and Stopping the Container
 
 - **To start the container**:
 
