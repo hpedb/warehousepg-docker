@@ -72,14 +72,26 @@ docker exec -it mdw /bin/bash
 
   ```bash
   docker compose -f docker-compose.yml start
+
+  docker exec -it mdw /bin/bash
+
+  gpstart -a
   ```
+
+  Database needs to be manually restarted after this using `gpstart -a`
 
 - **Remove everything (including data)**:  
 
   Following command will stop the multi-container deployment and also remove the network and volumes that belong to the containers. Running this command means it will delete the containers as well as remove the volumes that the containers are associated with.
 
   ```bash
-  docker compose down -v
+  docker compose -f docker-compose.yml down -v
+  ```
+
+  This will not remove the `datadirs` from your host machine, so these needs to be removed manually.
+
+  ```bash
+  rm -rf datadirs/
   ```
 
 ## 9. Directory Structure  
